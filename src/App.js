@@ -10,12 +10,28 @@ class App extends Component {
   }
 
   onChange = e => {
-    this.setState({ search: e.target.value });
-  };
+    const search = e.target.value;
+    this.setState(state => ({ ...state, search }));
 
-  handleSubmit = e => {
-    e.preventDefault();
-    const api_key = "6gRumwXlVtGsX5daPpTRluUUgmvngHi2";
+    const key = "6gRumwXlVtGsX5daPpTRluUUgmvngHi2";
+    const url =
+      "http://api.giphy.com/v1/gifs/search?q=" +
+      search +
+      "&api_key=" +
+      key +
+      "&rating=G";
+
+    fetch(url)
+      .then(response => response.json())
+      .then(data => {
+        const img = data.data[0].images.fixed_height.url;
+        this.setState(state => ({
+          ...state,
+          term: "",
+          img
+        }));
+      })
+      .catch(e => console.log("fetch from API error", e));
   };
 
   render() {
@@ -23,6 +39,8 @@ class App extends Component {
       <div>
         <h1>giffy</h1>
         <input value={this.state.search} onChange={this.onChange} />
+        <br />
+        <img src={this.state.img} height="200" alt={this.state.search} />
       </div>
     );
   }

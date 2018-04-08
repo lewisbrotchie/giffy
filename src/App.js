@@ -21,18 +21,30 @@ class App extends Component {
       key +
       "&rating=G";
 
+    this.getImg(url);
+
+    // fetch(url)
+    //   .then(response => response.json())
+    //   .then(data => {
+    //     const img = data.data[0].images.fixed_height.url;
+    //     this.setState(state => ({
+    //       ...state,
+    //       term: "",
+    //       img
+    //     }));
+    //   })
+    //   .catch(e => console.log("fetch from API error", e));
+  };
+
+  getImg(url) {
     fetch(url)
       .then(response => response.json())
       .then(data => {
         const img = data.data[0].images.fixed_height.url;
-        this.setState(state => ({
-          ...state,
-          term: "",
-          img
-        }));
+        this.setState(state => ({ ...state, term: "", img }));
       })
       .catch(e => console.log("fetch from API error", e));
-  };
+  }
 
   render() {
     return (

@@ -15,7 +15,7 @@ class App extends Component {
 
     const key = "6gRumwXlVtGsX5daPpTRluUUgmvngHi2";
     const url =
-      "http://api.giphy.com/v1/gifs/search?q=" +
+      "https://api.giphy.com/v1/gifs/search?q=" +
       search +
       "&api_key=" +
       key +

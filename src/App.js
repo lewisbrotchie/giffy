@@ -59,17 +59,23 @@ class App extends Component {
   }
 
   render() {
+    const h1Style = { paddingLeft: "1.5em", fontFamily: "Helvetica" };
+    const buttonStyle = {
+      padding: "0.5em",
+      margin: "0.5em"
+    };
+
     return (
       <div>
-        <h1 Style="padding-left: 1.5em">giffy</h1>
+        <h1 style={h1Style}>giffy</h1>
         <div>
           <input value={this.state.search} onChange={this.onChange} />
         </div>
         <div>
-          <button Style="padding: 0.5em; margin: 0.5em" onClick={this.trending}>
+          <button style={buttonStyle} onClick={this.trending}>
             Trending
           </button>
-          <button Style="padding: 0.5em; margin: 0.5em" onClick={this.random}>
+          <button style={buttonStyle} onClick={this.random}>
             Random
           </button>
         </div>

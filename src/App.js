@@ -22,19 +22,31 @@ class App extends Component {
       "&rating=G";
 
     this.getImg(url);
-
-    // fetch(url)
-    //   .then(response => response.json())
-    //   .then(data => {
-    //     const img = data.data[0].images.fixed_height.url;
-    //     this.setState(state => ({
-    //       ...state,
-    //       term: "",
-    //       img
-    //     }));
-    //   })
-    //   .catch(e => console.log("fetch from API error", e));
   };
+
+  random = () => {
+    const url =
+      "https://api.giphy.com/v1/gifs/random?api_key=6gRumwXlVtGsX5daPpTRluUUgmvngHi2&rating=G";
+
+    this.getRandomImg(url);
+  };
+
+  trending = () => {
+    const url =
+      "https://api.giphy.com/v1/gifs/trending?api_key=6gRumwXlVtGsX5daPpTRluUUgmvngHi2&limit=25&rating=G";
+
+    this.getImg(url);
+  };
+
+  getRandomImg(url) {
+    fetch(url)
+      .then(response => response.json())
+      .then(data => {
+        const img = data.data.images.fixed_height.url;
+        this.setState(state => ({ ...state, img }));
+      })
+      .catch(e => console.log("fetch from API error - ", e));
+  }
 
   getImg(url) {
     fetch(url)
@@ -43,15 +55,24 @@ class App extends Component {
         const img = data.data[0].images.fixed_height.url;
         this.setState(state => ({ ...state, term: "", img }));
       })
-      .catch(e => console.log("fetch from API error", e));
+      .catch(e => console.log("fetch from API error - ", e));
   }
 
   render() {
     return (
       <div>
-        <h1>giffy</h1>
-        <input value={this.state.search} onChange={this.onChange} />
-        <br />
+        <h1 Style="padding-left: 1.5em">giffy</h1>
+        <div>
+          <input value={this.state.search} onChange={this.onChange} />
+        </div>
+        <div>
+          <button Style="padding: 0.5em; margin: 0.5em" onClick={this.trending}>
+            Trending
+          </button>
+          <button Style="padding: 0.5em; margin: 0.5em" onClick={this.random}>
+            Random
+          </button>
+        </div>
         <img src={this.state.img} height="200" alt={this.state.search} />
       </div>
     );
